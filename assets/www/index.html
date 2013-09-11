@@ -3,12 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
-    <title>Hello World</title>
+    <title>test01</title>
     <script type="text/javascript" src="js/cordova.js"></script>
     <script type="text/javascript" src="js/module/jquery-1.9.1.min.js"></script>
     <link rel="stylesheet" type="text/css" media="all" href="css/jquery.mobile-1.3.2.min.css">       
     <script type="text/javascript" src="js/module/jquery.mobile-1.3.2.min.js"></script>
-    <script type="text/javascript" src="js/plugin/SQLitePlugin.js"></script>
     
     <script type="text/javascript">
     // Wait for Cordova to load
@@ -16,57 +15,32 @@
 
     // Cordova is ready
     function onDeviceReady() {
-      var db = window.sqlitePlugin.openDatabase({name: "DB"});
-
-      db.transaction(function(tx) {
-        tx.executeSql('DROP TABLE IF EXISTS test_table');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, data text, data_num integer)');
-
-        // demonstrate PRAGMA:
-        db.executeSql("pragma table_info (test_table);", [], function(res) {
-          console.log("PRAGMA res: " + JSON.stringify(res));
-        });
-
-        tx.executeSql("INSERT INTO test_table (data, data_num) VALUES (?,?)", ["test", 100], function(tx, res) {
-          console.log("insertId: " + res.insertId + " -- probably 1");
-          console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
-          alert("insertId: " + res.insertId + " -- probably 1");
-
-          db.transaction(function(tx) {
-            tx.executeSql("select count(id) as cnt from test_table;", [], function(tx, res) {
-              console.log("res.rows.length: " + res.rows.length + " -- should be 1");
-              console.log("res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
-              alert("res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
-            });
-          });
-
-        }, function(e) {
-          console.log("ERROR: " + e.message);
-        });
-      });
     }
     </script>
   </head>
   <body> 
     <div data-role="page" id="index">
       <div data-role="header" data-position="fixed">
-        <h1>PhoneGap入門</h1>
+        <h1>test01</h1>
       </div>
-      
       <div data-role="content">
         <p>Some content here</p>
-        a<br> 
-      </div>
- 
-      <div data-role="footer" data-position="fixed">  
-        <div data-role="navbar">
-          <ul>
-            <li><a href="#list-page" class="ui-btn-active ui-state-persist">一覧</a></li>
-            <li><a href="#snap-page">写真撮影</a></li>
-          </ul>
-        </div>
+        <a href='#new' data-role="button">new</a>
+        <a href='#new' data-role="button">new</a>
+
       </div>
     </div>
+
+    <div data-role="page" id="new">
+      <div data-role="header" data-position="fixed">
+        <h1>test01(new)</h1>
+      </div>
+      <div data-role="content">
+        <p>Some content here(new)</p>
+        a<br> 
+      </div>
+    </div>
+
   
   </body>
   
